@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FearTheL1fe's Hub</title>
+<style>
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background: linear-gradient(to bottom, #000000, #4b4b4b);
+    color: #ddd;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem;
+  }
+
+  /* Container for content */
+  .container {
+    max-width: 720px;
+    width: 100%;
+  }
+
+  /* Navigation */
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 2px solid #555;
+  }
+  nav button {
+    background: none;
+    border: none;
+    font-weight: 600;
+    font-size: 1.25rem;
+    padding: 0.5rem 0;
+    cursor: pointer;
+    color: #aaa;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s, border-bottom-color 0.3s;
+  }
+  nav button:hover {
+    color: #fff;
+    border-bottom-color: #fff;
+  }
+  nav button.active {
+    color: #fff;
+    border-bottom-color: #fff;
+    cursor: default;
+  }
+
+  /* Headings */
+  h1 {
+    font-weight: 700;
+    font-size: 2.75rem;
+    margin: 0 0 1rem 0;
+    color: #f0f0f0;
+  }
+  h2 {
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem 0;
+    color: #e0e0e0;
+  }
+
+  /* Video styling */
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* Patch notes list */
+  ul.patch-list {
+    padding-left: 1.25rem;
+    color: #ccc;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  ul.patch-list li {
+    margin-bottom: 0.5rem;
+  }
+
+  /* About text */
+  #about p {
+    color: #ccc;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 4rem;
+    padding-top: 1rem;
+    width: 100%;
+    max-width: 720px;
+    border-top: 1px solid #555;
+    font-size: 0.875rem;
+    color: #888;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <nav role="tablist" aria-label="Primary">
+      <button id="tab-home" role="tab" aria-selected="true" aria-controls="home" class="active">Home</button>
+      <button id="tab-about" role="tab" aria-selected="false" aria-controls="about">About</button>
+    </nav>
+
+    <section id="home" role="tabpanel" aria-labelledby="tab-home">
+      <h1>FearTheL1fe's Hub</h1>
+
+      <h2>Latest Video</h2>
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/FER9yUSASRY"
+          title="Highlighted Gameplay Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <p style="margin-top: 0.75rem; color: #aaa; font-style: italic;">Highlighted Gameplay Video</p>
+
+      <h2>Patch Notes 14.15 (Summary)</h2>
+      <ul class="patch-list">
+        <li>Buffed champions: Twisted Fate, Karma, Rammus</li>
+        <li>Nerfed champions: Rek'Sai, Azir, Senna</li>
+        <li>New item changes: Duskblade and Solstice Sleigh reworked</li>
+        <li>ARAM balance update + bug fixes</li>
+        <li>Ranked season adjustments and matchmaking tuning</li>
+      </ul>
+    </section>
+
+    <section id="about" role="tabpanel" aria-labelledby="tab-about" hidden>
+      <h1>About Me</h1>
+      <p>
+        Hey! I’m FearTheL1fe, a passionate gamer who lives and breathes League of Legends.<br />
+        I started this channel to share my gameplay highlights, meta insights, and just to connect with other summoners who love the Rift as much as I do.<br />
+        When I’m not climbing the ranked ladder, you’ll find me exploring new champions, trying out wacky builds, or chilling with the community.<br />
+        This channel isn’t just about gameplay — it’s about the fun, the hype moments, and the journey we all take in the game.<br />
+        Thanks for stopping by, and I hope you enjoy the content as much as I enjoy making it!
+      </p>
+    </section>
+  </div>
+
+  <footer>
+    &copy; 2025 FearTheL1fe's Trademark. All rights reserved.
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('nav button');
+    const panels = document.querySelectorAll('section[role="tabpanel"]');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Deactivate all tabs and panels
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach(p => p.hidden = true);
+
+        // Activate clicked tab and panel
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById(tab.getAttribute('aria-controls')).hidden = false;
+      });
+    });
+  </script>
+</body>
+</html>
